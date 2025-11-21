@@ -7,66 +7,127 @@ class ContaBanco{
     private float $Saldo;
     private bool $Status;
 
-    //Metodo construtor
-    public function __construct(){
-        $this->setSaldo(0.0);
+    // Método construtor: é executado automaticamente quando um objeto da classe é criado
+public function __construct(){
+    // Define o saldo inicial da conta como 0.0
+    $this->setSaldo(0.0);
+
+    // Define que a conta começa fechada
+    $this->setStatus(false);
+
+    // Apenas exibe uma mensagem informando que a conta foi criada
+    echo "Conta criada com sucesso !!";
+}
+
+
+// =========================
+// MÉTODO PARA ABRIR CONTA
+// =========================
+public function AbrirConta($t){
+    // Define o tipo da conta (CC = conta corrente, CP = conta poupança)
+    $this->setTipo($t);
+
+    // Ao abrir uma conta, o status passa a ser TRUE (aberta)
+    $this->setStatus(true);
+
+    // Se a conta for do tipo CC, adiciona R$50 de saldo inicial
+    if($t == "CC"){
+        $this->setSaldo(50);
+
+    // Se a conta for do tipo CP, adiciona R$150 de saldo inicial
+    }elseif($t == "CP"){
+        $this->setSaldo(150);
+    }
+}
+
+
+// =========================
+// MÉTODO PARA FECHAR CONTA
+// =========================
+public function FecharConta(){
+    // Se ainda houver dinheiro na conta, não pode fechar
+    if($this->getSaldo() > 0){
+        echo "Ainda há dinheiro na conta, saque para fechá-la";
+
+    // Se o saldo for negativo, existem dívidas, então não pode fechar
+    }elseif($this->getSaldo() < 0){
+        echo "Você tem débitos nessa conta, impossível fechar";
+
+    // Se o saldo for exatamente 0, pode fechar a conta
+    }else{
         $this->setStatus(false);
-        echo "Conta criada com sucesso !!";
     }
+}
 
-    //METODOS
-    public function AbrirConta($t){
-        $this->setTipo($t);
-        $this->setStatus(true);
-        if($t == "CC"){
-            $this->setSaldo(50);
-        }elseif($t == "CP"){
-            $this->setSaldo(150);
-        }
-    }
-    public function FecharConta(){
-        if($this->getSaldo() > 0){
-            echo "Ainda ha dinheiro na conta, saque para fechala";
-        }elseif($this->getSaldo() < 0){
-            echo "Voce tem debitos nessa conta, impossivel fechar";
-        }else{
-            $this->setStatus(false);
-        }
-    }
-    public function Depositar($v){
-        if($this->getStatus() == true){
-            $this->setSaldo($this->getSaldo() +  $v);
-        }else{
-            echo "conat fechda não consigo depositar";
-        }
-    }
 
-    public function sacar($v){
-        if($this->getStatus() == true){
-            if($this->getSaldo()){
-                if($this->getSaldo() >= $v){
-                    $this->setSaldo($this->getSaldo() - $v);
-                }
-            }else{
-                echo "saldo insuficiente para saldo";
-            }
-        } else{
-            echo "Não posso sacar de um conta fechada";
-        }
-    }
+// =========================
+// MÉTODO PARA DEPOSITAR
+// =========================
+public function Depositar($v){
+    // Só é possível depositar se a conta estiver aberta
+    if($this->getStatus() == true){
 
-    public function PagarMensal(){
-        if($this->getTipo() == "CC"){
-            $v = 12;
-        } elseif($this->getTipo() == "CP"){
-            $v = 20;
-        }
+        // Soma o valor depositado ao saldo atual
+        $this->setSaldo($this->getSaldo() +  $v);
+
+    }else{
+        // Se a conta estiver fechada, não permite depósito
+        echo "Conta fechada, não consigo depositar";
+    }
+}
+
+
+// =========================
+// MÉTODO PARA SACAR
+// =========================
+public function sacar($v){
+    // Primeiro verifica se a conta está aberta
+    if($this->getStatus() == true){
+
+        // Verifica se existe saldo (mas aqui o if está incompleto, falta comparar)
         if($this->getSaldo()){
-            $this->setSaldo($this->getSaldo() -  $v);
+
+            // Confirma se o saldo é suficiente para sacar o valor desejado
+            if($this->getSaldo() >= $v){
+
+                // Realiza o saque (subtrai saldo)
+                $this->setSaldo($this->getSaldo() - $v);
+            }
+
         }else{
-            echo "Problemas com a conta";
+            // Se não houver saldo suficiente
+            echo "Saldo insuficiente para saque";
         }
+
+    } else{
+        // Se a conta estiver fechada
+        echo "Não posso sacar de uma conta fechada";
     }
+}
+
+
+// =========================
+// MÉTODO PARA PAGAR MENSALIDADE
+// =========================
+public function PagarMensal(){
+    // Define o valor da mensalidade dependendo do tipo da conta
+    if($this->getTipo() == "CC"){
+        $v = 12; // Conta corrente paga 12
+    } elseif($this->getTipo() == "CP"){
+        $v = 20; // Conta poupança paga 20
+    }
+
+    // Verifica se há saldo para pagar a mensalidade
+    if($this->getSaldo()){
+
+        // Subtrai o valor da mensalidade do saldo
+        $this->setSaldo($this->getSaldo() -  $v);
+
+    }else{
+        // Se não tiver saldo, informa problema
+        echo "Problemas com a conta";
+    }
+}
 
     //Metodos Getters e Setters
     public function getNumConta(){
