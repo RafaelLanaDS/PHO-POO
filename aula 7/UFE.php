@@ -1,0 +1,122 @@
+<?php 
+ class Lutador{
+    private string $nome;
+    private string $nacionalidade;
+    private int $idade;
+    private float $altura;
+    private float $peso;
+    private string $categoria;
+    private int $vitorias;
+    private int $derrotas;
+    private int $empates;
+
+    //CONSTRUTOR
+    function __construct($no, $na, $id, $al, $pe, $vi, $de, $em,){
+        $this->nome = $no;
+        $this->nacionalidade = $na;
+        $this->idade = $id;
+        $this->altura = $al;
+        $this->setpeso($pe);
+        $this->vitorias = $vi;
+        $this->derrotas = $de;
+        $this->empates = $em;
+    }
+    //GETTERS acessores
+    private function getnome(){
+        return $this->nome;
+    }
+    private function getnacionalidade(){
+        return $this->nacionalidade;
+    }
+    private function getidade(){
+        return $this->idade;
+    }
+    private function getaltura(){
+        return $this->altura;
+    } 
+    private function getpeso(){
+        return $this->peso;
+    } 
+    private function getcategoria(){
+        return $this->categoria;
+    } 
+    private function getvitorias(){
+        return $this->vitorias;
+    } 
+    private function getderrotas(){
+        return $this->derrotas;
+    } 
+    private function getempates(){
+        return $this->empates;
+    }
+
+    //SETTERS modificadores
+    private function setnome($n){
+        $this->nome = $n;
+    }
+    private function setnacionalidade($nac){
+        $this->nacionalidade = $nac;
+    }
+    private function setidade($i){
+        $this->idade = $i;
+    }
+    private function setaltura($a){
+        $this->altura = $a;
+    } 
+    private function setpeso($p){
+        $this->peso = $p;
+        $this->setcategoria();
+    } 
+    private function setcategoria(){
+        if($this->peso < 52.2){
+            $this->categoria = "Ivalido";
+        }elseif ($this->peso <= 70.3){
+            $this->categoria = "leve";
+        }elseif ($this->peso <= 83.9){
+            $this->categoria = "Medio";
+        }elseif ($this->peso <= 120.2){
+            $this->categoria = "Pesado";
+        }else {
+            $this->categoria = "Invalido";
+        }
+    } 
+    private function setvitorias($v){
+        $this->vitorias = $v;
+    } 
+    private function setderrotas($d){
+        $this->derrotas = $d;
+    } 
+    private function setempates($e){
+        $this->empates = $e;
+    }  
+
+
+    //METODOS
+    public function apresentar(){
+        echo "<p>" . "----------------------" . "</p>";
+        echo "Chegou a hora! o lutador " . $this->getnome();
+        echo "veio diretamente do " .  $this->getnacionalidade();
+        echo " tem " . $this->getidade() . " anos e pesa " . $this->getpeso() . "kl";
+        echo " Ele tem " . $this->getvitorias() . " Vitorias ";
+        echo $this->getderrotas() . " Derrotas e " . $this->getempates() . " empates";
+    }
+    public function status(){
+        echo "<p>" . "----------------------" . "</p>";
+        echo $this->getnome() . " é um peso " . $this->getcategoria();
+        echo " e ja ganhou " . $this->getvitorias() . " vezes, ";
+        echo " perdeu " . $this->getderrotas() . " vezes e ";
+        echo " empatou " . $this->getempates() . " vezes!";
+
+    }
+    public function ganharLuta(){
+        $this->setvitorias($this->getvitorias() + 1);
+    }
+    public function perderLuta(){
+        $this->setderrotas($this->getderrotas() + 1);
+    }
+    public function empatarLuta(){
+        $this->setempates($this->getempates() + 1);
+    }
+
+ }
+?>

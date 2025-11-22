@@ -11,10 +11,14 @@
         <?php 
             require_once "controleRemoto.php";
             $c = new controleRemoto();
-            //$c->ligar();
-            $c->maisVolume(10);
-            $c->menosVolume(20);
+            $c->ligar();
+            $c->maisVolume();
+            $c->maisVolume();
+            $c->menosVolume();
+            $c->ligarMudo();
+            $c->desligarMudo();
             $c->abrirMenu();
+            
         ?>
     </pre>
 </body>
