@@ -22,31 +22,31 @@
         $this->empates = $em;
     }
     //GETTERS acessores
-    private function getnome(){
+    function getnome(){
         return $this->nome;
     }
-    private function getnacionalidade(){
+    function getnacionalidade(){
         return $this->nacionalidade;
     }
-    private function getidade(){
+    function getidade(){
         return $this->idade;
     }
-    private function getaltura(){
+    function getaltura(){
         return $this->altura;
     } 
-    private function getpeso(){
+    function getpeso(){
         return $this->peso;
     } 
-    private function getcategoria(){
+    function getcategoria(){
         return $this->categoria;
     } 
-    private function getvitorias(){
+    function getvitorias(){
         return $this->vitorias;
     } 
-    private function getderrotas(){
+    function getderrotas(){
         return $this->derrotas;
     } 
-    private function getempates(){
+    function getempates(){
         return $this->empates;
     }
 
@@ -67,7 +67,7 @@
         $this->peso = $p;
         $this->setcategoria();
     } 
-    private function setcategoria(){
+    function setcategoria(){
         if($this->peso < 52.2){
             $this->categoria = "Ivalido";
         }elseif ($this->peso <= 70.3){
