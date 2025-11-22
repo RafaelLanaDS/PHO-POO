@@ -29,10 +29,11 @@ class controleRemoto implements Controlador{
     private function setligado($ligado){
         $this->ligado = $ligado;
     }
-    private function settocando($tocando){
+    function settocando($tocando){
         $this->tocando = $tocando;
     }
 
+    //metodos do Controlador
     function ligar(){
         $this->setligado(true);
     } 
