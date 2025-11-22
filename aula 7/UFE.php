@@ -16,7 +16,7 @@
         $this->nacionalidade = $na;
         $this->idade = $id;
         $this->altura = $al;
-        $this->setpeso($pe);
+        $this->setpeso($pe); // peso define automaticamente a categoria
         $this->vitorias = $vi;
         $this->derrotas = $de;
         $this->empates = $em;
@@ -63,11 +63,11 @@
     private function setaltura($a){
         $this->altura = $a;
     } 
-    private function setpeso($p){
+    private function setpeso($p){ // define o peso e atualiza automaticamente a categoria
         $this->peso = $p;
         $this->setcategoria();
     } 
-    function setcategoria(){
+    private function setcategoria(){ // categoria definida com base no peso
         if($this->peso < 52.2){
             $this->categoria = "Ivalido";
         }elseif ($this->peso <= 70.3){
@@ -80,6 +80,8 @@
             $this->categoria = "Invalido";
         }
     } 
+
+    // atualizam resultados da carreira do lutador 
     private function setvitorias($v){
         $this->vitorias = $v;
     } 
@@ -91,8 +93,9 @@
     }  
 
 
-    //METODOS
-    public function apresentar(){
+    //Metodos
+
+    public function apresentar(){ // Exibe apresentação na tela
         echo "<p>" . "----------------------" . "</p>";
         echo "Chegou a hora! o lutador " . $this->getnome();
         echo "veio diretamente do " .  $this->getnacionalidade();
@@ -100,7 +103,7 @@
         echo " Ele tem " . $this->getvitorias() . " Vitorias ";
         echo $this->getderrotas() . " Derrotas e " . $this->getempates() . " empates";
     }
-    public function status(){
+    public function status(){ // exibe status resumido
         echo "<p>" . "----------------------" . "</p>";
         echo $this->getnome() . " é um peso " . $this->getcategoria();
         echo " e ja ganhou " . $this->getvitorias() . " vezes, ";
@@ -108,6 +111,8 @@
         echo " empatou " . $this->getempates() . " vezes!";
 
     }
+
+    //metodos publicos para mudar resultado
     public function ganharLuta(){
         $this->setvitorias($this->getvitorias() + 1);
     }
