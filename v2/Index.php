@@ -97,6 +97,7 @@
 
     echo "<h3>Produtos Cadastrados:</h3>";
     echo "<li>{$produto1->getNome()} - R$ {$produto1->getPreco()} ({$produto1->getUnidade()->value})</li>";
+    echo "<li>{$produto2->getNome()} - R$ {$produto2->getPreco()} ({$produto1->getUnidade()->value})</li>";
     echo "<li>{$produto3->getNome()} - R$ {$produto3->getPreco()} ({$produto3->getUnidade()->value})</li>";
 
 
