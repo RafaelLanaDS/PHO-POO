@@ -94,7 +94,6 @@
 
 
     //Metodos
-
     public function apresentar(){ // Exibe apresentação na tela
         echo "<p>" . "----------------------" . "</p>";
         echo "Chegou a hora! o lutador " . $this->getnome();
