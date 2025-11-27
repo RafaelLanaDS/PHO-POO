@@ -3,8 +3,7 @@ require_once "Pessoa.php";
 class Professor extends Pessoa{
     // Atributos
     private $especialidade;
-    private $salario;
-
+    private $salario ;
     // -------- GETTERS --------
     public function getEspecialidade() {
         return $this->especialidade;
